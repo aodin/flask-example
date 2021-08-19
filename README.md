@@ -115,11 +115,19 @@ with app.app_context():
 
 #### Using Migrations
 
+Get a list of flask commands:
+
     flask db --help
+
+Add migrations to an app (only need to run once):
 
     flask db init
 
+Create a new migration:
+
     flask db migrate -m "Initial migration."
+
+Perform migrations:
 
     flask db upgrade
 
@@ -139,6 +147,8 @@ With `psql`:
 
 * Works with pytest (may require app_context)
 * Works with Blueprint
+* works with Flask login
+* WOrks with pandas
 
 * Database session can be imported in a REPL (may require app_context)
 * Prefer the "application factory pattern"

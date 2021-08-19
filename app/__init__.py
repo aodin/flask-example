@@ -9,14 +9,6 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(256), unique=True, nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.email}>'
-
-
 def create_app(test_config=None):
     """Application-factory pattern."""
     app = Flask(__name__)
@@ -27,6 +19,12 @@ def create_app(test_config=None):
     if test_config:
         app.config.from_mapping(test_config)
 
+    # Register extensions
     db.init_app(app)
     migrate.init_app(app, db)
+
+    # Register blueprints
+    from .routes import main
+    app.register_blueprint(main)
+
     return app

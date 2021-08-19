@@ -6,7 +6,7 @@ class Default:
     # Connection format: dialect+driver://username:password@host:port/database
     # e.g. for PostGres postgresql://user:password@host/database
     # e.g. for local SQLite 'sqlite:////tmp/test.db'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost/flask_postgres'
 
 
 class Development(Default):
