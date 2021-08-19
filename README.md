@@ -87,3 +87,18 @@ print(db.session.query(User).order_by(User.id))
 With `psql`:
 
     CREATE DATABASE flask_postgres;
+
+
+
+
+#### Checklist
+
+
+* Server (development or otherwise) starts with `flask run`
+* Can create CLI commands
+* Can use default CLI commands `db`
+
+* Can be used with pytest (may require app_context)
+
+* Database session can be imported in a REPL (may require app_context)
+* Prefer the "application factory pattern"
