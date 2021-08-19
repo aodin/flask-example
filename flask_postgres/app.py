@@ -1,14 +1,17 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+
+from .config import Default, Development
+
 
 app = Flask(__name__)
 
-# Connection URI format: dialect+driver://username:password@host:port/database
-# e.g. for PostGres postgresql://scott:tiger@localhost/mydatabase
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+app.config.from_object(Development)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = True
+
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class User(db.Model):

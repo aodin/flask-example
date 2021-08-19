@@ -79,4 +79,11 @@ db.session.add_all([
 
 db.session.query(User).filter_by(email='admin@example.com').first()
 db.session.query(User).order_by(User.id)[1:3]
+print(db.session.query(User).order_by(User.id))
 ```
+
+#### Using PostGres
+
+With `psql`:
+
+    CREATE DATABASE flask_postgres;
