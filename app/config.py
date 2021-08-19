@@ -12,4 +12,4 @@ class Default:
 class Development(Default):
     DEVELOPMENT = True
     DEBUG = True
-    SQLALCHEMY_ECHO = True
+    # SQLALCHEMY_ECHO = True

@@ -1,6 +1,13 @@
 Flask + PostGres
 ====
 
+## Quickstart
+
+    flask run
+
+
+### Install
+
 Install [Poetry](https://python-poetry.org/docs/#installation) and then run:
 
     poetry install
@@ -49,8 +56,13 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/
 
   * https://flask-sqlalchemy.palletsprojects.com/en/2.x/contexts/
 
+https://flask-migrate.readthedocs.io/en/latest/
 
-### Quickstart
+
+
+### Example Database Operations
+
+Without migrations or the application-factory context:
 
 ```py
 from flask_postgres.app import db
@@ -82,6 +94,36 @@ db.session.query(User).order_by(User.id)[1:3]
 print(db.session.query(User).order_by(User.id))
 ```
 
+With migrations and the application-factory context:
+
+```py
+from app import db, create_app, User
+
+app = create_app()
+
+db.create_all(app=create_app())
+
+with app.app_context():
+    admin = User(email='admin@example.com')
+    db.session.add(admin)
+    db.session.commit()
+
+with app.app_context():
+    User.query.all()
+```
+
+
+#### Using Migrations
+
+    flask db --help
+
+    flask db init
+
+    flask db migrate -m "Initial migration."
+
+    flask db upgrade
+
+
 #### Using PostGres
 
 With `psql`:
@@ -89,16 +131,16 @@ With `psql`:
     CREATE DATABASE flask_postgres;
 
 
-
-
 #### Checklist
 
 
 * Server (development or otherwise) starts with `flask run`
-* Can create CLI commands
-* Can use default CLI commands `db`
+* Can use other package CLI commands, e.g. `db`
 
-* Can be used with pytest (may require app_context)
+* Works with pytest (may require app_context)
+* Works with Blueprint
 
 * Database session can be imported in a REPL (may require app_context)
 * Prefer the "application factory pattern"
+
+* Can create CLI custom commands
