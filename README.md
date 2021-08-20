@@ -58,6 +58,14 @@ https://flask-sqlalchemy.palletsprojects.com/en/2.x/
 
 https://flask-migrate.readthedocs.io/en/latest/
 
+Testing with pytest and postgres
+
+http://alexmic.net/flask-sqlalchemy-pytest/
+
+https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest/
+
+
+For timestamps: https://flask-sqlalchemy.palletsprojects.com/en/2.x/customizing/#model-mixins
 
 
 ### Example Database Operations

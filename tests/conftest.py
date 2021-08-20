@@ -1,6 +1,6 @@
 import pytest
 
-from app import create_app
+from app import create_app, db
 
 
 @pytest.fixture
@@ -9,11 +9,16 @@ def application():
     application = create_app({
         'TESTING': True,
         'WTF_CSRF_ENABLED': False,
+        'SQLALCHEMY_DATABASE_URI': 'postgresql://postgres:postgres@localhost/flask_postgres_test'
     })
 
     # An application context is required to handle requests or database queries
     with application.app_context():
+        db.create_all()
         yield application
+        # Remove any ongoing sessions, this will help prevent locking
+        db.session.remove()
+        db.drop_all()
 
 
 @pytest.fixture
