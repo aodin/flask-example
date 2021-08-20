@@ -1,29 +1,25 @@
 Flask Example
 ====
 
+An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with the following goals:
+
+- [X] Use standard CLI commands, such as `flask run` and `flask db`
+- [X] Separate development and production configurations set by `FLASK_ENV`
+- [x] `pytest` can run from the project root
+- [x] Can use PostGres for testing
+- [x] Creates a separate PostGres database for testing
+- [ ] Runs PostGres tests in transactions
+- [ ] Can use sqlite for testing
+- [ ] Database configuration can be set without modifying committed files
+- [X] Can send email from routes and test them via pytest
+- [ ] Example S3 bucket access and testing
+- [ ] Example Flask-Login usage and testing
+- [ ] Common timestamp model mixins
+
+
 ## Quickstart
 
-    FLASK_ENV=development flask run
-
-    pytest
-
-
-### Install
-
-Install [Poetry](https://python-poetry.org/docs/#installation) and then run:
-
-    poetry install
-
-A virtual environment can then be activated with:
-
-    poetry shell
-
-Requirements are generated with:
-
-    poetry export -f requirements.txt --output requirements.txt --without-hashes
-
-
-If you don't wast to use Poetry, create a [virtual environment](https://docs.python.org/3/tutorial/venv.html) locally with:
+Create a virtual environment:
 
 ```sh
 python3 -m venv .venv
@@ -31,100 +27,45 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-If you later decide to use poetry, it should already be tied to the local virtual environment. This is specified in the `poetry.toml` file, which was created with:
+Run the development server:
 
-    poetry config virtualenvs.in-project true --local
+    FLASK_ENV=development flask run
 
 
-#### ARM64
+Run the test suite:
 
-Some packages require special handling for ARM64.
+    pytest
 
-For `psycopg`:
 
-```sh
-export PATH=/opt/local/lib/postgresql13/bin:$PATH
-python -m pip install -U psycopg2 --no-cache
-```
+#### Database Configuration
+
+The database configuration is set in [config.py](app/config.py).
+
+Some systems may require the installation of `psycopg2-binary` instead of the `psycopg2` package.
 
 
 ## Tutorials
 
-https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/
-
-https://github.com/mjhea0/flaskr-tdd
-
-https://flask-sqlalchemy.palletsprojects.com/en/2.x/
-
-  * https://flask-sqlalchemy.palletsprojects.com/en/2.x/contexts/
-
-https://flask-migrate.readthedocs.io/en/latest/
-
-Testing with pytest and postgres
-
-http://alexmic.net/flask-sqlalchemy-pytest/
-
-https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest/
-
-
-Creating a database with PostGres
-https://github.com/kvesteri/sqlalchemy-utils
-https://stackoverflow.com/a/8977109/868330
-
-How Django creates a test database:
-https://github.com/django/django/blob/ca9872905559026af82000e46cde6f7dedc897b6/django/db/backends/base/creation.py
+* [Example Flask application from Test-Driven Development](https://github.com/mjhea0/flaskr-tdd)
+* [Example RealPython application using migrations](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
+* [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
+  - [... Contexts](https://flask-sqlalchemy.palletsprojects.com/en/2.x/contexts/)
+* [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/)
+* [Testing with pytest and postgres](http://alexmic.net/flask-sqlalchemy-pytest/)
+* [Testing with pytest and sqlalchemy](https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest/)
+* [Creating a PostGres database with SQLAlchemy](https://stackoverflow.com/a/8977109/868330)
+* [Creating a PostGres database with SQLAlchemy Utils](https://github.com/kvesteri/sqlalchemy-utils)
+* [How Django creates a test database](https://github.com/django/django/blob/ca9872905559026af82000e46cde6f7dedc897b6/django/db/backends/base/creation.py)
+* [Example timestamp mixin](https://flask-sqlalchemy.palletsprojects.com/en/2.x/customizing/#model-mixins)
+* [Pytest fixture scopes](https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes)
+* [Request fixture](https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9)
+* [Sending Email](https://pythonhosted.org/Flask-Mail/)
 
 
-Example timestamp mixin
-https://flask-sqlalchemy.palletsprojects.com/en/2.x/customizing/#model-mixins
+#### Example Database Operations
 
 
-Pytest fixture scopes
-https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes
-
-Request fixture
-https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9
-
-Email
-https://pythonhosted.org/Flask-Mail/
-
-
-
-### Example Database Operations
-
-Without migrations or the application-factory context:
-
-```py
-from flask_postgres.app import db
-
-db.create_all()  # Only run when schema changes
-
-from flask_postgres.app import User
-admin = User(email='admin@example.com')
-db.session.add(admin)
-db.session.commit()
-
-User.query.first()
-User.query.all()
-User.query.filter_by(email='admin@example.com').first()
-User.query.filter(User.email.ilike('%@EXAMPLE.COM')).all()
-
-query = User.query.filter(User.email.ilike('@EXAMPLE.COM'))
-print(query)
-print(query.statement)
-
-db.session.add_all([
-    User(email='user@example.com'),
-    User(email='client@example.com'),
-    User(email='guest@example.com'),
-])
-
-db.session.query(User).filter_by(email='admin@example.com').first()
-db.session.query(User).order_by(User.id)[1:3]
-print(db.session.query(User).order_by(User.id))
-```
-
-With migrations and the application-factory context:
+Using an application-factory context:
 
 ```py
 from app import db, create_app, User
@@ -162,34 +103,8 @@ Perform migrations:
     flask db upgrade
 
 
-#### Using PostGres
+#### Testing Email
 
-With `psql`:
-
-    CREATE DATABASE flask_postgres;
-
-
-### Email
-
-
-RUn a local SMTP server:
+Run a local SMTP server:
 
     python -m smtpd -n -c DebuggingServer localhost:1025
-
-
-
-#### Checklist
-
-
-* Server (development or otherwise) starts with `flask run`
-* Can use other package CLI commands, e.g. `db`
-
-* Works with pytest (may require app_context)
-* Works with Blueprint
-* works with Flask login
-* WOrks with pandas
-
-* Database session can be imported in a REPL (may require app_context)
-* Prefer the "application factory pattern"
-
-* Can create CLI custom commands
