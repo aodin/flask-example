@@ -65,7 +65,27 @@ http://alexmic.net/flask-sqlalchemy-pytest/
 https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest/
 
 
-For timestamps: https://flask-sqlalchemy.palletsprojects.com/en/2.x/customizing/#model-mixins
+Creating a database with PostGres
+https://github.com/kvesteri/sqlalchemy-utils
+https://stackoverflow.com/a/8977109/868330
+
+How Django creates a test database:
+https://github.com/django/django/blob/ca9872905559026af82000e46cde6f7dedc897b6/django/db/backends/base/creation.py
+
+
+Example timestamp mixin
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/customizing/#model-mixins
+
+
+Pytest fixture scopes
+https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes
+
+Request fixture
+https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9
+
+Email
+https://pythonhosted.org/Flask-Mail/
+
 
 
 ### Example Database Operations
