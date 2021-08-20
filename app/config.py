@@ -1,3 +1,9 @@
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # Project root
+
+
 class Default:
     DEBUG = False
     TESTING = False
