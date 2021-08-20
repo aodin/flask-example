@@ -42,6 +42,16 @@ class Default:
 
 
 class Development(Default):
+    """Development config."""
     DEVELOPMENT = True
     DEBUG = True
-    # SQLALCHEMY_ECHO = True
+    SQLALCHEMY_ECHO = True
+
+    # Mail options: https://pythonhosted.org/Flask-Mail/#configuring-flask-mail
+    MAIL_PORT = 1025
+    MAIL_DEFAULT_SENDER = 'sender@example.com'
+
+
+class Production(Default):
+    """Production config."""
+    pass

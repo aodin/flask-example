@@ -14,6 +14,10 @@ class TestDatabase(Database):
 
 @pytest.fixture(scope='session')
 def database():
+    """
+    Creating a testing database for the entire length of the testing session.
+    This fixture will only be run once per testing session.
+    """
     engine = create_engine(TestDatabase.connection_uri())
     if database_exists(engine.url):
         confirm = input(

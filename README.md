@@ -1,9 +1,11 @@
-Flask + PostGres
+Flask Example
 ====
 
 ## Quickstart
 
-    flask run
+    FLASK_ENV=development flask run
+
+    pytest
 
 
 ### Install
@@ -165,6 +167,15 @@ Perform migrations:
 With `psql`:
 
     CREATE DATABASE flask_postgres;
+
+
+### Email
+
+
+RUn a local SMTP server:
+
+    python -m smtpd -n -c DebuggingServer localhost:1025
+
 
 
 #### Checklist

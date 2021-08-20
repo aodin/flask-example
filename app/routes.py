@@ -1,7 +1,8 @@
 import click
 from flask import Blueprint, render_template
+from flask_mail import Message
 
-from . import db
+from . import db, mail
 from .models import User, normalize_email
 
 
@@ -29,3 +30,17 @@ def create_user(email: str):
 def user(id):
     user = User.query.get_or_404(id)
     return render_template('user.html', user=user)
+
+
+@main.route('/users/<int:id>/mail', methods=['POST'])
+def send_mail(id):
+    user = User.query.get_or_404(id)
+
+    msg = Message(
+        "Hello",
+        sender="sender@example.com",
+        recipients=[user.email],
+    )
+    msg.body = "Testing the email"
+    mail.send(msg)
+    return "Message Sent"

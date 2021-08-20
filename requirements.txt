@@ -1,26 +1,26 @@
 alembic==1.6.5
-attrs @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/6f/a9/ee/569c37f69a8c365ee41d2340aeac0214ee8c0086b8d8db43a21545204b/attrs-21.2.0-py2.py3-none-any.whl
-click @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/ae/32/83/e159324c1bd58177322f4e45f598d500fe22544bff20f53f55cf749da8/click-8.0.1-py3-none-any.whl
-Flask @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/11/d0/70/f0ced5a972a10ba57f76ae7688eed0964eb52c935dc381d4a8d4bccce3/Flask-2.0.1-py3-none-any.whl
+attrs==21.2.0
+blinker==1.4
+click==8.0.1
+Flask==2.0.1
+Flask-Mail==0.9.1
 Flask-Migrate==3.1.0
 Flask-SQLAlchemy==2.5.1
-iniconfig @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/fa/b0/c6/10cfac68c9e6de9d2a1678366ca89fd9292b362c1760dbe758e41691cb/iniconfig-1.1.1-py2.py3-none-any.whl
-itsdangerous @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/56/85/a6/70db371e4b63cdd55bf95de92ac726d8cf622812e0d7383910edd55619/itsdangerous-2.0.1-py3-none-any.whl
-Jinja2 @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/21/2e/46/0a76ea6f6a15e594c9828a85a781f1cee8ed5a1b77e361305645f9e1f4/Jinja2-3.0.1-py3-none-any.whl
-Mako==1.1.4
-MarkupSafe @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/f9/f9/25/7f44f1bf951a4c3fa8a8da01dbd5848048d284f5fda3bfbf182ce35af9/MarkupSafe-2.0.1-cp39-cp39-macosx_10_9_universal2.whl
-packaging @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/f9/4f/09/c91a145b26102e014fd6e33bd8c7b87306c8e1d4a771158f34dd13210e/packaging-21.0-py3-none-any.whl
-pluggy @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/29/58/fc/ed8b7451d3ef91a6465024f5656141da996e7aafd4d41a1659629a75e7/pluggy-0.13.1-py2.py3-none-any.whl
+iniconfig==1.1.1
+itsdangerous==2.0.1
+Jinja2==3.0.1
+Mako==1.1.5
+MarkupSafe==2.0.1
+packaging==21.0
+pluggy==0.13.1
 psycopg2==2.9.1
-py @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/60/79/0b/c48bd9c2a989aa8b1eb7a67cd02b053c10734f2e4e5665f7995f09999c/py-1.10.0-py2.py3-none-any.whl
-pyparsing @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/92/0f/cf/effdcd5d76a6186df0969f85b3b030284ff8058936d5016540b5258ea3/pyparsing-2.4.7-py2.py3-none-any.whl
-pytest @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/17/a3/46/eb89acf91c8962553e409da649186ff5e3d2c1c93195f0643e7dfd1b57/pytest-6.2.4-py3-none-any.whl
-pytest-flask-sqlalchemy==1.0.2
-pytest-mock==3.6.1
+py==1.10.0
+pyparsing==2.4.7
+pytest==6.2.4
 python-dateutil==2.8.2
 python-editor==1.0.4
 six==1.16.0
 SQLAlchemy==1.4.23
 SQLAlchemy-Utils==0.37.8
-toml @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/6b/6a/c9/53b19f7870a77d855e8b05ecdc98193944e5d246dafe11bbcad850ecba/toml-0.10.2-py2.py3-none-any.whl
-Werkzeug @ file:///Users/aodin/Library/Caches/pypoetry/artifacts/4f/82/5b/068ad32eb584b1a25f08994af7a9721c4c3fc69bb03dda7e400fb2f1ea/Werkzeug-2.0.1-py3-none-any.whl
+toml==0.10.2
+Werkzeug==2.0.1
