@@ -6,15 +6,21 @@ An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with
 - [X] Use standard CLI commands, such as `flask run` and `flask db`
 - [X] Separate development and production configurations set by `FLASK_ENV`
 - [x] `pytest` can run from the project root
+- [x] Uses database migrations
+- [ ] Uses database migrations in testing
 - [x] Can use PostGres for testing
 - [x] Creates a separate PostGres database for testing
 - [ ] Runs PostGres tests in transactions
 - [ ] Can use sqlite for testing
 - [ ] Database configuration can be set without modifying committed files
+- [X] Example Blueprint usage
+- [X] Custom CLI commands
 - [X] Can send email from routes and test them via pytest
 - [ ] Example S3 bucket access and testing
 - [ ] Example Flask-Login usage and testing
-- [ ] Common timestamp model mixins
+- [ ] Example timestamp model mixin
+- [ ] Custom Jinja function examples
+- [ ] Middleware and global template context variable examples
 
 
 ## Quickstart
@@ -46,19 +52,22 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
 
 ## Tutorials
 
-* [Example Flask application from Test-Driven Development](https://github.com/mjhea0/flaskr-tdd)
-* [Example RealPython application using migrations](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
+* Example applications
+  - [Test-Driven Development application](https://github.com/mjhea0/flaskr-tdd)
+  - [RealPython application using migrations](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
 * [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
-  - [... Contexts](https://flask-sqlalchemy.palletsprojects.com/en/2.x/contexts/)
+  - [Contexts](https://flask-sqlalchemy.palletsprojects.com/en/2.x/contexts/)
 * [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/)
-* [Testing with pytest and postgres](http://alexmic.net/flask-sqlalchemy-pytest/)
-* [Testing with pytest and sqlalchemy](https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest/)
-* [Creating a PostGres database with SQLAlchemy](https://stackoverflow.com/a/8977109/868330)
-* [Creating a PostGres database with SQLAlchemy Utils](https://github.com/kvesteri/sqlalchemy-utils)
-* [How Django creates a test database](https://github.com/django/django/blob/ca9872905559026af82000e46cde6f7dedc897b6/django/db/backends/base/creation.py)
+* Testing with PostGres
+  - [Testing with pytest and postgres](http://alexmic.net/flask-sqlalchemy-pytest/)
+  - [Testing with pytest and sqlalchemy](https://xvrdm.github.io/2017/07/03/testing-flask-sqlalchemy-database-with-pytest/)
+  - [Creating a PostGres database with SQLAlchemy](https://stackoverflow.com/a/8977109/868330)
+  - [Creating a PostGres database with SQLAlchemy Utils](https://github.com/kvesteri/sqlalchemy-utils)
+  - [How Django creates a test database](https://github.com/django/django/blob/ca9872905559026af82000e46cde6f7dedc897b6/django/db/backends/base/creation.py)
 * [Example timestamp mixin](https://flask-sqlalchemy.palletsprojects.com/en/2.x/customizing/#model-mixins)
-* [Pytest fixture scopes](https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes)
-* [Request fixture](https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9)
+* Pytest fixtures
+  - [Scopes](https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes)
+  - [Request](https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9)
 * [Sending Email](https://pythonhosted.org/Flask-Mail/)
 
 
