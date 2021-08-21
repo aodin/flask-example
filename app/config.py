@@ -34,6 +34,7 @@ class Default:
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = ''
+    S3_BUCKET = ''
 
     # Connection format: dialect+driver://username:password@host:port/database
     # e.g. for PostGres postgresql://user:password@host/database

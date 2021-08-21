@@ -53,6 +53,7 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
 ## Tutorials
 
 * Example applications
+  - [Flask Mega-Tutorial application](https://github.com/miguelgrinberg/microblog)
   - [Test-Driven Development application](https://github.com/mjhea0/flaskr-tdd)
   - [RealPython application using migrations](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
 * [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
@@ -69,10 +70,14 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
   - [Scopes](https://docs.pytest.org/en/6.2.x/fixture.html#fixture-scopes)
   - [Request](https://medium.com/opsops/deepdive-into-pytest-parametrization-cb21665c05b9)
 * [Sending Email](https://pythonhosted.org/Flask-Mail/)
+* Custom CLI
+  - [Use closures to pass app to cli commands decorators](https://github.com/miguelgrinberg/microblog/blob/main/app/cli.py)
+* Testing S3
+  - [moto](https://github.com/spulec/moto)
+  - [With mocks](https://www.sanjaysiddhanti.com/2020/04/08/s3testing/)
 
 
 #### Example Database Operations
-
 
 Using an application-factory context:
 

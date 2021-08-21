@@ -1,8 +1,10 @@
 import click
-from flask import Blueprint, render_template
+from flask import current_app
+from flask import Blueprint, jsonify, render_template, redirect, url_for
 from flask_mail import Message
 
 from . import db, mail
+from .files import Example
 from .models import User, normalize_email
 
 
@@ -44,3 +46,17 @@ def send_mail(id):
     msg.body = "Testing the email"
     mail.send(msg)
     return "Message Sent"
+
+
+@main.route('/example.json', methods=['GET'])
+def get_file():
+    example = Example.load(current_app.config['S3_BUCKET'])
+    return jsonify(example.mapping)
+
+
+@main.route('/example.json', methods=['POST'])
+def update_file():
+    example = Example.load(current_app.config['S3_BUCKET'])
+    example.update()
+    example.save(current_app.config['S3_BUCKET'])
+    return redirect(url_for('main.get_file'))
