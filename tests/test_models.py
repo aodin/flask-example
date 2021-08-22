@@ -1,5 +1,5 @@
 from app import db
-from app.models import User
+from app.users import User
 
 
 class TestUser:

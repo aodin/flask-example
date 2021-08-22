@@ -3,7 +3,7 @@ from http import HTTPStatus
 import pytest
 
 from app import db, mail
-from app.models import User
+from app.users import User
 
 
 @pytest.fixture

@@ -38,6 +38,9 @@ def create_app(test_config=None):
     from .routes import main
     app.register_blueprint(main)
 
+    from .users.routes import users
+    app.register_blueprint(users)
+
     # Register custom jinja filters
     register_filters(app)
 
