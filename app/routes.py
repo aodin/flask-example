@@ -1,3 +1,5 @@
+import datetime
+
 import click
 from flask import current_app
 from flask import Blueprint, jsonify, render_template, redirect, url_for
@@ -28,14 +30,26 @@ def create_user(email: str):
     click.echo(f"Created a user with the email {user.email}")
 
 
+@main.route('/')
+def index():
+    """Index route with jinja context and filter examples."""
+    context = {
+        'now': datetime.datetime.now(),
+        'number': 1200.34000,
+    }
+    return render_template('index.html', **context)
+
+
 @main.route('/users/<int:id>')
 def user(id):
+    """Example route that queries from the database."""
     user = User.query.get_or_404(id)
     return render_template('user.html', user=user)
 
 
 @main.route('/users/<int:id>/mail', methods=['POST'])
 def send_mail(id):
+    """Route that ends an email."""
     user = User.query.get_or_404(id)
 
     msg = Message(

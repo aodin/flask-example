@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 from .config import Development, Production
+from .filters import register_filters
 
 
 db = SQLAlchemy()
@@ -36,5 +37,8 @@ def create_app(test_config=None):
     # Register blueprints
     from .routes import main
     app.register_blueprint(main)
+
+    # Register custom jinja filters
+    register_filters(app)
 
     return app

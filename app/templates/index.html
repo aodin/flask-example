@@ -1,0 +1,19 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}Flask Example{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row mt-3">
+    <div class="col">
+      <h2 class="mb-4">Flask Example</h2>
+      
+      <p>{{ now }}</p>
+      <p>{{ now|datetime }}</p>
+      <p>{{ number }}</p>
+      <p>{{ number|float(digits=0) }}</p>
+      <p>{{ number|float(digits=4) }}</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}

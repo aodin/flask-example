@@ -56,6 +56,8 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
   - [Flask Mega-Tutorial application](https://github.com/miguelgrinberg/microblog)
   - [Test-Driven Development application](https://github.com/mjhea0/flaskr-tdd)
   - [RealPython application using migrations](https://realpython.com/flask-by-example-part-2-postgres-sqlalchemy-and-alembic/)
+* Configuration
+  - [Flask API](https://flask.palletsprojects.com/en/2.0.x/config/)
 * [Flask SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/en/2.x/)
   - [Contexts](https://flask-sqlalchemy.palletsprojects.com/en/2.x/contexts/)
 * [Flask Migrate](https://flask-migrate.readthedocs.io/en/latest/)
