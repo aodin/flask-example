@@ -39,7 +39,7 @@ def create_app(test_config=None):
     app.register_blueprint(main)
 
     from .users.routes import users
-    app.register_blueprint(users)
+    app.register_blueprint(users, url_prefix='/users')
 
     # Register custom jinja filters
     register_filters(app)

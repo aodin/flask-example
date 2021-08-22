@@ -25,21 +25,21 @@ def create_user(email: str):
     click.echo(f"Created a user with the email {user.email}")
 
 
-@users.route('/users')
+@users.route('/')
 def list_users():
     """List all users."""
     results = User.query.order_by(User.id).all()
     return render_template('users/list.html', users=results)
 
 
-@users.route('/users/<int:id>')
+@users.route('/<int:id>')
 def user(id):
     """Example route that queries from the database."""
     user = User.query.get_or_404(id)
     return render_template('users/user.html', user=user)
 
 
-@users.route('/users/<int:id>/mail', methods=['POST'])
+@users.route('/<int:id>/mail', methods=['POST'])
 def send_mail(id):
     """Route that ends an email."""
     user = User.query.get_or_404(id)
