@@ -5,7 +5,14 @@ import tempfile
 from sqlalchemy.engine.url import make_url
 from sqlalchemy_utils import database_exists, create_database, drop_database
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent  # Project root
+
+
+def get_config():
+    if os.getenv('FLASK_ENV') == 'development':
+        return Development()
+    return Production()
 
 
 class Database:

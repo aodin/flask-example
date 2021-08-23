@@ -2,7 +2,7 @@ import click
 from flask import Blueprint, render_template
 from flask_mail import Message
 
-from .. import db, mail
+from ..extensions import db, mail
 from .models import User, normalize_email
 
 users = Blueprint('users', __name__, cli_group='users')

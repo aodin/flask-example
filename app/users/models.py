@@ -1,4 +1,4 @@
-from .. import db
+from ..extensions import db
 
 
 def normalize_email(email: str) -> str:
