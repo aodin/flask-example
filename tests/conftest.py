@@ -1,30 +1,34 @@
 import pytest
 
-from app import create_app, db
-from app.config import SqliteDatabase, PostgresDatabase
+from app import create_app, get_config, db
+from app.config import Database
 
 
 @pytest.fixture(scope='session')
-def database():
+def configuration():
     """
-    Creating a testing database for the entire length of the testing session.
-    This fixture will only be run once per testing session.
+    Get the current configuration and modify it for testing. This fixture will
+    only be run once per testing session.
     """
-    # test_db = SqliteDatabase('sqlite:////tmp/test.db')
-    test_db = PostgresDatabase('postgresql+psycopg2://postgres:postgres@localhost:5432/test_db')
+    config = get_config()
+    config.TESTING = True
+    config.WTF_CSRF_ENABLED = False
+
+    # Create a test version of the current database URI
+    db_instance = Database(config.SQLALCHEMY_DATABASE_URI)
+    test_db = db_instance.for_testing()
+    config.SQLALCHEMY_DATABASE_URI = str(test_db.url)
+
+    # Create the test database - this does not need an application context
     test_db.create()
-    yield test_db
+    yield config
     test_db.drop()
 
 
 @pytest.fixture
-def application(database):
-    """Yields an application with an app context."""
-    application = create_app({
-        'TESTING': True,
-        'WTF_CSRF_ENABLED': False,
-        'SQLALCHEMY_DATABASE_URI': database.url
-    })
+def application(configuration):
+    # Create an application using the test configuration
+    application = create_app(configuration)
 
     # An application context is required to handle requests or database queries
     with application.app_context():

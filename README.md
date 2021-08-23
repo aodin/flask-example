@@ -11,15 +11,15 @@ An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with
 - [x] Can use PostGres for testing
 - [x] Creates a separate PostGres database for testing
 - [ ] Runs PostGres tests in transactions
-- [ ] Can use sqlite for testing
+- [X] Can use sqlite for testing
 - [ ] Database configuration can be set without modifying committed files
 - [X] Example Blueprint usage
 - [X] Custom CLI commands
 - [X] Can send email from routes and test them via pytest
-- [ ] Example S3 bucket access and testing
+- [X] Example S3 bucket access and testing
 - [ ] Example Flask-Login usage and testing
 - [ ] Example timestamp model mixin
-- [ ] Custom Jinja function examples
+- [X] Custom Jinja function examples
 - [ ] Middleware and global template context variable examples
 
 

@@ -14,20 +14,18 @@ mail = Mail()
 migrate = Migrate()
 
 
-def create_app(test_config=None):
-    """Application-factory pattern."""
-    app = Flask(__name__)
-
+def get_config():
     if os.getenv('FLASK_ENV') == 'development':
-        app.config.from_object(Development)
-    else:
-        app.config.from_object(Production)
+        return Development()
+    return Production()
 
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Allow tests to override any configuration
-    if test_config:
-        app.config.from_mapping(test_config)
+def create_app(config=None):
+    """Application-factory pattern."""
+    if config is None:
+        config = get_config()
+    app = Flask(__name__)
+    app.config.from_object(config)
 
     # Register extensions
     db.init_app(app)
