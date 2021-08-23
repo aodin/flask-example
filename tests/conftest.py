@@ -1,15 +1,7 @@
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database, drop_database
 
 from app import create_app, db
-from app.config import Database
-
-
-class TestDatabase(Database):
-    @classmethod
-    def name(cls):
-        return f'test_{cls.NAME}'
+from app.config import SqliteDatabase, PostgresDatabase
 
 
 @pytest.fixture(scope='session')
@@ -18,22 +10,11 @@ def database():
     Creating a testing database for the entire length of the testing session.
     This fixture will only be run once per testing session.
     """
-    engine = create_engine(TestDatabase.connection_uri())
-    if database_exists(engine.url):
-        confirm = input(
-            "\n\nThe test database already exists. It may have been left in "
-            "an improper state because of previous exception.\n"
-            "Type 'yes' if you would like to try deleting the test "
-            "database '%s', or 'no' to cancel: " % TestDatabase.name()
-        )
-        if confirm == 'yes':
-            drop_database(engine.url)
-        else:
-            raise Exception("Tests cancelled.")
-
-    create_database(engine.url)
-    yield engine
-    drop_database(engine.url)
+    # test_db = SqliteDatabase('sqlite:////tmp/test.db')
+    test_db = PostgresDatabase('postgresql+psycopg2://postgres:postgres@localhost:5432/test_db')
+    test_db.create()
+    yield test_db
+    test_db.drop()
 
 
 @pytest.fixture
