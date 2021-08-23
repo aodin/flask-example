@@ -3,6 +3,7 @@ Flask Example
 
 An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with the following goals:
 
+- [X] Dependency management using [poetry](https://python-poetry.org)
 - [X] Use standard CLI commands, such as `flask run` and `flask db`
 - [X] Separate development and production configurations set by `FLASK_ENV`
 - [x] `pytest` can run from the project root
@@ -25,6 +26,8 @@ An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with
 
 ## Quickstart
 
+Requires Python 3.9+.
+
 Create a virtual environment:
 
 ```sh
@@ -41,6 +44,23 @@ Run the development server:
 Run the test suite:
 
     pytest
+
+
+### Poetry
+
+To use Poetry for dependency management, first install [Poetry](https://python-poetry.org/docs/master/#installation) 1.1.8+.
+
+A shell can be activated with:
+
+    poetry shell
+
+And dependencies installed with:
+
+    poetry install
+
+A `requirements.txt` file can be generated with:
+
+    poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 
 #### Database Configuration
@@ -84,11 +104,15 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
 Using an application-factory context:
 
 ```py
-from app import db, create_app, User
+from app import db, create_app
+from app.users import User
 
 app = create_app()
 
-db.create_all(app=create_app())
+db.create_all(app=app)
+
+# Either use the following with statements, or push an app context with:
+# app.app_context().push()
 
 with app.app_context():
     admin = User(email='admin@example.com')

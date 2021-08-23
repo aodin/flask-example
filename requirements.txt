@@ -1,26 +1,40 @@
-alembic==1.6.5
-attrs==21.2.0
+alembic==1.6.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
 blinker==1.4
-click==8.0.1
-Flask==2.0.1
-Flask-Mail==0.9.1
-Flask-Migrate==3.1.0
-Flask-SQLAlchemy==2.5.1
-iniconfig==1.1.1
-itsdangerous==2.0.1
-Jinja2==3.0.1
-Mako==1.1.5
-MarkupSafe==2.0.1
-packaging==21.0
-pluggy==0.13.1
-psycopg2==2.9.1
-py==1.10.0
-pyparsing==2.4.7
-pytest==6.2.4
-python-dateutil==2.8.2
-python-editor==1.0.4
-six==1.16.0
-SQLAlchemy==1.4.23
-SQLAlchemy-Utils==0.37.8
-toml==0.10.2
-Werkzeug==2.0.1
+boto3==1.18.26; python_version >= "3.6"
+botocore==1.21.26; python_version >= "3.6"
+certifi==2021.5.30; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0"
+cffi==1.14.6; python_version >= "3.6"
+charset-normalizer==2.0.4; python_full_version >= "3.6.0" and python_version >= "3"
+click==8.0.1; python_version >= "3.6"
+colorama==0.4.4; python_version >= "3.6" and python_full_version < "3.0.0" and platform_system == "Windows" or platform_system == "Windows" and python_version >= "3.6" and python_full_version >= "3.5.0"
+cryptography==3.4.7; python_version >= "3.6"
+flask-mail==0.9.1
+flask-migrate==3.1.0; python_version >= "3.6"
+flask-sqlalchemy==2.5.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.4.0")
+flask==2.0.1; python_version >= "3.6"
+greenlet==1.1.1; python_version >= "3" and python_full_version < "3.0.0" and platform_machine in "x86_64 X86_64 aarch64 AARCH64 ppc64le PPC64LE amd64 AMD64 win32 WIN32" and (python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0") or python_version >= "3" and platform_machine in "x86_64 X86_64 aarch64 AARCH64 ppc64le PPC64LE amd64 AMD64 win32 WIN32" and (python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0") and python_full_version >= "3.5.0"
+idna==3.2; python_version >= "3.5" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.5"
+importlib-metadata==4.6.4; python_version >= "3.6"
+itsdangerous==2.0.1; python_version >= "3.6"
+jinja2==3.0.1; python_version >= "3.6"
+jmespath==0.10.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.6"
+mako==1.1.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+markupsafe==2.0.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+more-itertools==8.8.0; python_version >= "3.5"
+moto==2.2.4
+psycopg2==2.9.1; python_version >= "3.6"
+pycparser==2.20; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
+python-dateutil==2.8.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+python-editor==1.0.4; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.6"
+pytz==2021.1
+pyyaml==5.4.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0"
+requests==2.26.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0"
+responses==0.13.4; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
+s3transfer==0.5.0; python_version >= "3.6"
+six==1.16.0; python_version >= "3.4" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.4" and python_version < "4.0" and python_full_version >= "3.5.0"
+sqlalchemy-utils==0.37.8; python_version >= "3.4" and python_version < "4.0"
+sqlalchemy==1.4.23; python_version >= "3.6" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.6" and python_version < "4.0" and python_full_version >= "3.6.0"
+urllib3==1.26.6; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version < "4" and python_version >= "3.6"
+werkzeug==2.0.1; python_version >= "3.6"
+xmltodict==0.12.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
+zipp==3.5.0; python_version >= "3.6"
