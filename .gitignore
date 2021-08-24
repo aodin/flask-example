@@ -1,4 +1,10 @@
+# Environment
 .vscode
 .venv
+
+# Cache
 *.pyc
 __pycache__
+
+# Local config
+app/local_config.py

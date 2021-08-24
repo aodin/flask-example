@@ -13,7 +13,7 @@ An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with
 - [x] Creates a separate PostGres database for testing
 - [ ] Runs PostGres tests in transactions
 - [X] Can use sqlite for testing
-- [ ] Database configuration can be set without modifying committed files
+- [X] Database configuration can be set without modifying committed files
 - [X] Example Blueprint usage
 - [X] Custom CLI commands
 - [X] Can send email from routes and test them via pytest

@@ -7,7 +7,7 @@ from app.users import User
 
 
 @pytest.fixture
-def user(application):
+def user(context):
     user = User(email='user@example.com')
     db.session.add(user)
     db.session.commit()

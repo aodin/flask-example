@@ -4,9 +4,7 @@ from app.users import User
 
 class TestUser:
     """Test the User model."""
-    # NOTE: the application fixture is required for database access
-
-    def test_db(self, application):
+    def test_db(self, context):
         user = User(email='user@example.com')
         assert user.email == 'user@example.com'
         db.session.add(user)

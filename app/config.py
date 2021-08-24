@@ -103,11 +103,18 @@ class Default:
     S3_BUCKET = ''
     WTF_CSRF_ENABLED = True
 
+    # Example value that will be set by various configuration approaches
+    EXAMPLE_VALUE = 0
+
     # Connection format: dialect+driver://username:password@host:port/database
     # e.g. for PostGres postgresql://user:password@host/database
     # e.g. for local SQLite 'sqlite:////tmp/filename.db'
     SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Mail options: https://pythonhosted.org/Flask-Mail/#configuring-flask-mail
+    MAIL_PORT = 1025
+    MAIL_DEFAULT_SENDER = 'sender@example.com'
 
 
 class Development(Default):
@@ -115,10 +122,6 @@ class Development(Default):
     DEVELOPMENT = True
     DEBUG = True
     SQLALCHEMY_ECHO = True
-
-    # Mail options: https://pythonhosted.org/Flask-Mail/#configuring-flask-mail
-    MAIL_PORT = 1025
-    MAIL_DEFAULT_SENDER = 'sender@example.com'
 
 
 class Production(Default):

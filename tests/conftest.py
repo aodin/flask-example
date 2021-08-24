@@ -1,45 +1,60 @@
+import boto3
+from moto import mock_s3
 import pytest
 
-from app import create_app, get_config, db
+from app import create_app, db, migrate
 from app.config import Database
 
 
 @pytest.fixture(scope='session')
-def configuration():
+def s3():
+    """Mock S3 bucket."""
+    with mock_s3():
+        conn = boto3.resource('s3', region_name='us-east-1')
+        yield conn.create_bucket(Bucket='example')
+
+
+@pytest.fixture(scope='session')
+def application():
     """
-    Get the current configuration and modify it for testing. This fixture will
-    only be run once per testing session.
+    Get the current application and modify it for testing. A test database
+    will also be created, but the database schema will not be added.
+    Most test functions should use the 'context' fixture, which will
+    generate a blank database schema per function.
     """
-    config = get_config()
-    config.TESTING = True
-    config.WTF_CSRF_ENABLED = False
+    application = create_app(dict(
+        TESTING=True,
+        WTF_CSRF_ENABLED=False,
+    ))
 
     # Create a test version of the current database URI
-    db_instance = Database(config.SQLALCHEMY_DATABASE_URI)
+    db_instance = Database(application.config['SQLALCHEMY_DATABASE_URI'])
     test_db = db_instance.for_testing()
-    config.SQLALCHEMY_DATABASE_URI = str(test_db.url)
+    application.config['SQLALCHEMY_DATABASE_URI'] = str(test_db.url)
+
+    # Re-register the new URL with the database and migration extensions
+    db.init_app(application)
+    migrate.init_app(application, db)
 
     # Create the test database - this does not need an application context
     test_db.create()
-    yield config
+    yield application
     test_db.drop()
 
 
 @pytest.fixture
-def application(configuration):
-    # Create an application using the test configuration
-    application = create_app(configuration)
-
+def context(application):
+    """Create an application context with a valid database schema."""
     # An application context is required to handle requests or database queries
     with application.app_context():
-        db.create_all()
+        db.create_all()  # Create schema, such as the users table
         yield application
-        # Remove any ongoing sessions; this will help prevent locking
-        db.session.remove()
-        db.drop_all()
+        # The following code will execute once all tests have finished
+        db.session.remove()  # Remove ongoing sessions to help prevent locking
+        db.drop_all()  # Drop all schema
 
 
 @pytest.fixture
-def client(application):
+def client(context):
     """Yields a client that can send mock HTTP requests."""
-    yield application.test_client()
+    yield context.test_client()

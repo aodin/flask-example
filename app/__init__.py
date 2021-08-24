@@ -7,13 +7,19 @@ from .routes import main
 from .users.routes import users
 
 
-def create_app(config=None):
+def create_app(test_config=None, local_config='local_config.py'):
     """Application-factory pattern."""
-    if config is None:
-        config = get_config()
-
     app = Flask(__name__)
-    app.config.from_object(config)
+    app.config.from_object(get_config())
+    if app.config.from_pyfile(local_config, silent=True):
+        app.logger.info(f'Successfully loaded local config from {local_config}')
+
+    if test_config:
+        app.config.from_mapping(test_config)
+
+    # NOTE: all config values should be set by this point
+    # If there is a required config value, check it now
+    assert app.config['SECRET_KEY'], "Please set a value for SECRET_KEY"
 
     # Register extensions
     db.init_app(app)
