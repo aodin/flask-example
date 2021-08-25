@@ -116,6 +116,10 @@ class Default:
     MAIL_PORT = 1025
     MAIL_DEFAULT_SENDER = 'sender@example.com'
 
+    # S3 config
+    S3_BUCKET = ''
+    S3_REGION = 'us-east-1'
+
 
 class Development(Default):
     """Development config."""

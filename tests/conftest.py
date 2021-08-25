@@ -4,14 +4,7 @@ import pytest
 
 from app import create_app, db, migrate
 from app.config import Database
-
-
-@pytest.fixture(scope='session')
-def s3():
-    """Mock S3 bucket."""
-    with mock_s3():
-        conn = boto3.resource('s3', region_name='us-east-1')
-        yield conn.create_bucket(Bucket='example')
+from app.files import Example
 
 
 @pytest.fixture(scope='session')
@@ -40,6 +33,17 @@ def application():
     test_db.create()
     yield application
     test_db.drop()
+
+
+@pytest.fixture(scope='session')
+def s3(application):
+    """Mock S3 bucket."""
+    with mock_s3():
+        conn = boto3.resource('s3', region_name=application.config['S3_REGION'])
+        bucket = conn.create_bucket(Bucket=application.config['S3_BUCKET'])
+        # Load any files that are required for the application
+        Example({'timestamp': 1000}).save(bucket.name)
+        yield bucket
 
 
 @pytest.fixture

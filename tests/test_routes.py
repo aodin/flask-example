@@ -8,10 +8,18 @@ from app.users import User
 
 @pytest.fixture
 def user(context):
+    """Returns a valid user that has been persisted to the database."""
+    # NOTE: Database operations require a context fixture, even if the context
+    # is not used directly
     user = User(email='user@example.com')
     db.session.add(user)
     db.session.commit()
     yield user
+
+
+def test_file(client, s3):
+    response = client.get(f'/example.json')
+    assert response.status_code == HTTPStatus.OK
 
 
 def test_user(user, client):

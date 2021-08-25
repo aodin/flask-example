@@ -20,6 +20,7 @@ def create_app(test_config=None, local_config='local_config.py'):
     # NOTE: all config values should be set by this point
     # If there is a required config value, check it now
     assert app.config['SECRET_KEY'], "Please set a value for SECRET_KEY"
+    assert app.config['S3_BUCKET'], "Please set a value for S3_BUCKET"
 
     # Register extensions
     db.init_app(app)
