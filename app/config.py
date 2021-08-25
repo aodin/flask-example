@@ -47,9 +47,13 @@ class Database:
             if not database:
                 return InMemorySqliteDatabase(self.url)
 
-            path = Path(database)
-            test_path = str(path.with_name(f'{prefix}{path.name}'))
-            return SqliteDatabase(self.url.set(database=test_path))
+            # Otherwise, a temporary file will be used
+            # NOTE: to use a specific file instead:
+            # path = Path(database)
+            # test_path = str(path.with_name(f'{prefix}{path.name}'))
+            # return SqliteDatabase(self.url.set(database=test_path))
+            return SqliteDatabase(self.url)
+
         raise Exception(f'A {backend} backend cannot be used for testing')
 
 
@@ -84,10 +88,19 @@ class InMemorySqliteDatabase(Database):
 
 
 class SqliteDatabase(Database):
-    # TODO test if file already exists?
+    def __init__(self, url):
+        super().__init__(url)
+        self.fd, self.path = tempfile.mkstemp()
+        self.url = self.url.set(database=self.path)
+
+    def exists(self) -> bool:
+        # NOTE: Since we're using a temporary file, we don't need to check
+        # if the file already exists. If we decided to use a specific file
+        # instead, then we should first check `os.path.exists()``
+        return False
 
     def create(self):
-        self.fd, self.path = tempfile.mkstemp()
+        pass
 
     def drop(self):
         # Delete the temporary sqlite database after the tests have completed
