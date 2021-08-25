@@ -65,7 +65,13 @@ A `requirements.txt` file can be generated with:
 
 #### Database Configuration
 
-The database configuration is set in [config.py](app/config.py).
+The database URL can be set in a local configuration file located at `app/local_config.py`. This file will be ignored by git. It should be a valid python valid, with uppercase keys for any values that should be added to the Flask configuration. Such as:
+
+```py
+SECRET_KEY = 'insecure-do-not-use-me'
+S3_BUCKET = 'example-bucket'
+SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/sqlite.db'
+```
 
 Some systems may require the installation of `psycopg2-binary` instead of the `psycopg2` package.
 
