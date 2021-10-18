@@ -104,6 +104,7 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
 * Testing S3
   - [moto](https://github.com/spulec/moto)
   - [With mocks](https://www.sanjaysiddhanti.com/2020/04/08/s3testing/)
+  - [boto3 resource and clients](https://www.learnaws.org/2021/02/24/boto3-resource-client/)
 
 
 #### Example Database Operations

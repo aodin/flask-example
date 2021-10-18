@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "flask_postgres"
+name = "flask-example"
 version = "0.1.0"
 description = ""
 authors = ["aodin <aaronoellis@gmail.com>"]

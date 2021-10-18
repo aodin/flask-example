@@ -11,7 +11,7 @@ def format_float(value, default='', digits=None) -> str:
         else:
             return f"{float(value):.{digits}f}"
     except (ValueError, TypeError):
-        return default    
+        return default
 
 
 def register_filters(app):

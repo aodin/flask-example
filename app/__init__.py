@@ -8,12 +8,13 @@ from .users.routes import users
 
 
 def create_app(test_config=None, local_config='local_config.py'):
-    """Application-factory pattern."""
+    """Create the application using an application-factory pattern."""
     app = Flask(__name__)
     app.config.from_object(get_config())
     if app.config.from_pyfile(local_config, silent=True):
         app.logger.info(f'Successfully loaded local config from {local_config}')
 
+    # Test configuration must be set after local configuration changes
     if test_config:
         app.config.from_mapping(test_config)
 
