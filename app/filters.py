@@ -1,6 +1,9 @@
+from .models import now
+
+
 def format_datetime(value, code='%A, %B %-m, %Y %H:%M:%S') -> str:
     """Format datetimes in jinja templates."""
-    return value.strftime(code)
+    return value.strftime(code) if value else ''
 
 
 def format_float(value, default='', digits=None) -> str:
@@ -19,3 +22,4 @@ def register_filters(app):
     # Custom jinja template functions
     app.jinja_env.filters['datetime'] = format_datetime
     app.jinja_env.filters['float'] = format_float
+    app.jinja_env.globals['now'] = now

@@ -18,10 +18,10 @@ An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with
 - [X] Custom CLI commands
 - [X] Can send email from routes and test them via pytest
 - [X] Example S3 bucket access and testing
-- [ ] Example Flask-Login usage and testing
-- [ ] Example timestamp model mixin
+- [X] Example Flask-Login usage and testing
+- [X] Example timestamp model mixin
 - [X] Custom Jinja function examples
-- [ ] Middleware and global template context variable examples
+- [X] Global template context variable examples
 
 
 ## Quickstart

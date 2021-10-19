@@ -13,8 +13,8 @@
 
       <p><a href="{{ url_for('users.list_users') }}">Users</a></p>
 
-      <p>{{ now }}</p>
-      <p>{{ now|datetime }}</p>
+      <p>{{ now() }}</p>
+      <p>{{ now()|datetime }}</p>
       <p>{{ number }}</p>
       <p>{{ number|float(digits=0) }}</p>
       <p>{{ number|float(digits=4) }}</p>

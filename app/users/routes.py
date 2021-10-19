@@ -10,8 +10,9 @@ users = Blueprint('users', __name__, cli_group='users')
 
 @users.cli.command('create')
 @click.argument('email')
-def create_user(email: str):
-    """Create a new user with the given email"""
+@click.argument('password')
+def create_user(email: str, password: str):
+    """Create a new user with the given email and password."""
     email = normalize_email(email)
     user = User.query.filter_by(email=email).first()
     if user:
@@ -20,6 +21,8 @@ def create_user(email: str):
         )
 
     user = User(email=email)
+    user.set_password(password)
+
     db.session.add(user)
     db.session.commit()
     click.echo(f"Created a user with the email {user.email}")
