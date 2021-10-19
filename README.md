@@ -105,6 +105,8 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
   - [moto](https://github.com/spulec/moto)
   - [With mocks](https://www.sanjaysiddhanti.com/2020/04/08/s3testing/)
   - [boto3 resource and clients](https://www.learnaws.org/2021/02/24/boto3-resource-client/)
+* Testing authentication
+  - [Logging in and out](https://flask.palletsprojects.com/en/2.0.x/testing/#logging-in-and-out)
 
 
 #### Example Database Operations

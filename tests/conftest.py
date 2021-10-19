@@ -5,6 +5,9 @@ import pytest
 from app import create_app, db, migrate
 from app.config import Database
 from app.files import Example
+from app.users.models import User
+
+SECURE_PASSWORD = 'bTZaelFDBJM3yIfY'
 
 
 @pytest.fixture(scope='session')
@@ -37,7 +40,11 @@ def application():
 
 @pytest.fixture(scope='session')
 def s3(application):
-    """Mock S3 bucket."""
+    """
+    Mock S3 bucket. If the initialization of your application requires S3
+    access, then the application should require this fixture, instead of the
+    current structure.
+    """
     with mock_s3():
         conn = boto3.resource('s3', region_name=application.config['S3_REGION'])
         bucket = conn.create_bucket(Bucket=application.config['S3_BUCKET'])
@@ -62,3 +69,22 @@ def context(application):
 def client(context):
     """Yields a client that can send mock HTTP requests."""
     yield context.test_client()
+
+
+@pytest.fixture
+def user(context):
+    """Returns a valid user object that has been persisted to the database."""
+    user = User(email='user@example.com')
+    user.set_password(SECURE_PASSWORD)
+    db.session.add(user)
+    db.session.commit()
+    yield user
+
+
+@pytest.fixture
+def logged_in(client, user):
+    client.post('/login', data=dict(
+        email=user.email,
+        password=SECURE_PASSWORD,
+    ))
+    yield user

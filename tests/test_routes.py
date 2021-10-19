@@ -1,20 +1,38 @@
 from http import HTTPStatus
 
-import pytest
+from flask_login import login_user
 
 from app import db, mail
-from app.users import User
+from .conftest import SECURE_PASSWORD
 
 
-@pytest.fixture
-def user(context):
-    """Returns a valid user that has been persisted to the database."""
-    # NOTE: Database operations require a context fixture, even if the context
-    # is not used directly
-    user = User(email='user@example.com')
-    db.session.add(user)
-    db.session.commit()
-    yield user
+def test_login(client, user):
+    """Test login."""
+    response = client.get('/login')
+    assert response.status_code == HTTPStatus.OK
+
+    # A valid login should redirect
+    response = client.post('/login', data=dict(
+        email=user.email,
+        password=SECURE_PASSWORD,
+    ))
+    assert response.status_code == HTTPStatus.FOUND
+    assert len(response.headers.getlist('Set-Cookie')), \
+        "A cookie was not set after a valid login"
+
+
+def test_profile(client, user):
+    """Test a route that requires authentication."""
+    response = client.get('/profile')
+    assert response.status_code == HTTPStatus.FOUND
+
+    client.post('/login', data=dict(
+        email=user.email,
+        password=SECURE_PASSWORD,
+    ))
+
+    response = client.get('/profile')
+    assert response.status_code == HTTPStatus.OK
 
 
 def test_file(client, s3):

@@ -63,7 +63,7 @@ class User(UserMixin, TimestampMixin, db.Model):
 
     def is_active(self) -> bool:
         """Overwrites the default is_active method of UserMixin."""
-        return self.has_unusable_password
+        return self.has_usable_password
 
 
 @login_manager.user_loader
