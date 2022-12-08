@@ -26,7 +26,7 @@ An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with
 
 ## Quickstart
 
-Requires Python 3.9+.
+Requires Python 3.10+.
 
 Create a virtual environment:
 

@@ -6,7 +6,7 @@ authors = ["aodin <aaronoellis@gmail.com>"]
 license = "UNLICENSED"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 psycopg2 = "^2.9.5"
 Flask = "^2.2.2"
 Flask-Login = "^0.6.2"
