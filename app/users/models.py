@@ -1,5 +1,5 @@
+from __future__ import annotations
 import secrets
-from typing import Optional
 
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String
@@ -67,5 +67,5 @@ class User(UserMixin, TimestampMixin, db.Model):
 
 
 @login_manager.user_loader
-def load_user(id: str) -> Optional[User]:
+def load_user(id: str) -> User | None:
     return User.query.filter_by(id=id).first()

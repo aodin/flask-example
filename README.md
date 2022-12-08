@@ -1,7 +1,7 @@
 Flask Example
 ====
 
-An example [Flask](https://flask.palletsprojects.com/en/2.0.x/) application with the following goals:
+An example [Flask](https://palletsprojects.com/p/flask/) application with the following goals:
 
 - [X] Dependency management using [poetry](https://python-poetry.org)
 - [X] Use standard CLI commands, such as `flask run` and `flask db`
@@ -38,7 +38,7 @@ python -m pip install -r requirements.txt
 
 Run the development server:
 
-    FLASK_ENV=development flask run
+    FLASK_DEBUG=true flask run
 
 
 Run the test suite:
@@ -48,7 +48,7 @@ Run the test suite:
 
 ### Poetry
 
-To use Poetry for dependency management, first install [Poetry](https://python-poetry.org/docs/master/#installation) 1.1.8+.
+To use Poetry for dependency management, first install [Poetry](https://python-poetry.org/docs/master/#installation) 1.2+.
 
 A shell can be activated with:
 
