@@ -61,6 +61,8 @@ def context(application):
     """Create an application context with a valid database schema."""
     # An application context is required to handle requests or database queries
     with application.app_context():
+        # Ignore the separate schemas during testing
+        db.engine.update_execution_options(schema_translate_map={"private": None})
         db.create_all()  # Create schema, such as the users table
         yield application
         # The following code will execute once all tests have finished

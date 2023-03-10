@@ -7,6 +7,16 @@
   <div class="row mt-3">
     <div class="col">
       <h2 class="mb-4">{{ user.email }}</h2>
+
+      {% if user.permissions %}
+      <p>Permissions:</p>
+      <ul>
+        {% for item in user.permissions %}
+        <li>{{ item.action }}</li>{% endfor %}
+      </ul>
+      {% else %}
+      <p  class="fst-italic">User has no permissions</p>
+      {% endif %}
     </div>
   </div>
 </div>

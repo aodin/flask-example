@@ -2,7 +2,8 @@ from __future__ import annotations
 import secrets
 
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from ..extensions import db, login_manager
@@ -28,6 +29,11 @@ class User(UserMixin, TimestampMixin, db.Model):
     id = Column(Integer, primary_key=True)
     email = Column(String(256), unique=True, nullable=False)
     password = Column(String(256), nullable=False, default="")
+
+    permissions: Mapped[list["Permission"]] = relationship(
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
 
     def __repr__(self):
         return f"<User {self.email}>"
@@ -71,3 +77,18 @@ class User(UserMixin, TimestampMixin, db.Model):
 @login_manager.user_loader
 def load_user(id: str) -> User | None:
     return User.query.filter_by(id=id).first()
+
+
+class Permission(db.Model):
+    """A permission for a User."""
+
+    __tablename__ = "permissions"
+    __table_args__ = {"schema": "private"}
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    action: Mapped[str]
+    user: Mapped["User"] = relationship(back_populates="permissions")
+
+    def __repr__(self):
+        return f"Permission(id={self.id!r}, user_id={self.user_id!r}), action={self.action!r})"

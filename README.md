@@ -116,10 +116,11 @@ Using an application-factory context:
 ```py
 from sqlalchemy import select
 from app import db, create_app
-from app.users import User
+from app.users import User, Permission
 
 app = create_app()
 
+# Database tables only need to be created once
 db.create_all(app=app)
 
 # Either use the following with statements, or push an app context with:
@@ -127,7 +128,8 @@ db.create_all(app=app)
 
 with app.app_context():
     admin = User(email='admin@example.com')
-    db.session.add(admin)
+    permission = Permission(user=admin, action="Publish")
+    db.session.add(admin, permission)
     db.session.commit()
 
 with app.app_context():
@@ -147,7 +149,7 @@ Add migrations to an app (only need to run once):
 
 Create a new migration:
 
-    flask db migrate -m "Initial migration."
+    flask db migrate -m "New migration"
 
 Perform migrations:
 

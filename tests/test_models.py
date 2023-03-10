@@ -1,5 +1,5 @@
 from app import db
-from app.users import User
+from app.users import User, Permission
 
 from .conftest import SECURE_PASSWORD
 
@@ -27,3 +27,12 @@ class TestUser:
         assert saved.is_active(), "Users with usuable passwords should be active"
 
         assert saved.check_password(SECURE_PASSWORD)
+
+        # Add a Permission
+        publish = Permission(user=user, action="Publish")
+        db.session.add(publish)
+        db.session.commit()
+        assert publish.id is not None, "The new permission's id was not set"
+
+        # Relationships will be queried when accessed
+        assert len(user.permissions) == 1
