@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # Project root
 
 
 def get_config():
-    if os.getenv('FLASK_ENV') == 'development':
+    if os.getenv("FLASK_ENV") == "development":
         return Development()
     return Production()
 
@@ -20,7 +20,7 @@ class Database:
         try:
             self.url = make_url(url)
         except Exception as e:
-            raise Exception('Unable to parse SQLALCHEMY_DATABASE_URI') from e
+            raise Exception("Unable to parse SQLALCHEMY_DATABASE_URI") from e
 
     @property
     def name(self):
@@ -35,12 +35,12 @@ class Database:
     def drop(self):
         raise NotImplementedError
 
-    def for_testing(self, prefix='test_'):
+    def for_testing(self, prefix="test_"):
         backend = self.url.get_backend_name()
-        if backend == 'postgresql':
-            test_url = self.url.set(database=f'{prefix}{self.url.database}')
+        if backend == "postgresql":
+            test_url = self.url.set(database=f"{prefix}{self.url.database}")
             return PostgresDatabase(test_url)
-        elif backend == 'sqlite':
+        elif backend == "sqlite":
             database = self.url.database
             # An empty database property is a special case for the sqlite
             # driver, representing an in-memory database.
@@ -54,7 +54,7 @@ class Database:
             # return SqliteDatabase(self.url.set(database=test_path))
             return SqliteDatabase(self.url)
 
-        raise Exception(f'A {backend} backend cannot be used for testing')
+        raise Exception(f"A {backend} backend cannot be used for testing")
 
 
 class PostgresDatabase(Database):
@@ -69,7 +69,7 @@ class PostgresDatabase(Database):
                 "Type 'yes' if you would like to try deleting the "
                 "database, or 'no' to cancel: " % self.name
             )
-            if confirm == 'yes':
+            if confirm == "yes":
                 self.drop()
             else:
                 raise Exception("Tests cancelled.")
@@ -112,8 +112,8 @@ class Default:
     DEBUG = False
     TESTING = False
     CSRF_ENABLED = True
-    SECRET_KEY = ''
-    S3_BUCKET = ''
+    SECRET_KEY = ""
+    S3_BUCKET = ""
     WTF_CSRF_ENABLED = True
 
     # Example value that will be set by various configuration approaches
@@ -122,20 +122,21 @@ class Default:
     # Connection format: dialect+driver://username:password@host:port/database
     # e.g. for PostGres postgresql://user:password@host/database
     # e.g. for local SQLite 'sqlite:////tmp/filename.db'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/app.db'
+    SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/app.db"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Mail options: https://pythonhosted.org/Flask-Mail/#configuring-flask-mail
     MAIL_PORT = 1025
-    MAIL_DEFAULT_SENDER = 'sender@example.com'
+    MAIL_DEFAULT_SENDER = "sender@example.com"
 
     # S3 config
-    S3_BUCKET = ''
-    S3_REGION = 'us-east-1'
+    S3_BUCKET = ""
+    S3_REGION = "us-east-1"
 
 
 class Development(Default):
     """Development config."""
+
     DEVELOPMENT = True
     DEBUG = True
     SQLALCHEMY_ECHO = True
@@ -143,4 +144,5 @@ class Development(Default):
 
 class Production(Default):
     """Production config."""
+
     pass

@@ -5,12 +5,12 @@ from flask_mail import Message
 from ..extensions import db, mail
 from .models import User, normalize_email
 
-users = Blueprint('users', __name__, cli_group='users')
+users = Blueprint("users", __name__, cli_group="users")
 
 
-@users.cli.command('create')
-@click.argument('email')
-@click.argument('password')
+@users.cli.command("create")
+@click.argument("email")
+@click.argument("password")
 def create_user(email: str, password: str):
     """Create a new user with the given email and password."""
     email = normalize_email(email)
@@ -28,24 +28,24 @@ def create_user(email: str, password: str):
     click.echo(f"Created a user with the email {user.email}")
 
 
-@users.route('/')
+@users.route("/")
 def list_users():
     """List all users."""
-    results = User.query.order_by(User.id).all()
-    return render_template('users/list.html', users=results)
+    results = db.session.scalars(db.select(User).order_by(User.id))
+    return render_template("users/list.html", users=results)
 
 
-@users.route('/<int:id>')
+@users.route("/<int:id>")
 def user(id):
     """Example route that queries from the database."""
-    user = User.query.get_or_404(id)
-    return render_template('users/user.html', user=user)
+    user = db.get_or_404(User, id)
+    return render_template("users/user.html", user=user)
 
 
-@users.route('/<int:id>/mail', methods=['POST'])
+@users.route("/<int:id>/mail", methods=["POST"])
 def send_mail(id):
     """Route that ends an email."""
-    user = User.query.get_or_404(id)
+    user = db.get_or_404(User, id)
 
     msg = Message(
         "Hello",

@@ -114,6 +114,7 @@ Some systems may require the installation of `psycopg2-binary` instead of the `p
 Using an application-factory context:
 
 ```py
+from sqlalchemy import select
 from app import db, create_app
 from app.users import User
 
@@ -130,7 +131,7 @@ with app.app_context():
     db.session.commit()
 
 with app.app_context():
-    User.query.all()
+    db.session.scalars(db.select(User).order_by(User.id))
 ```
 
 

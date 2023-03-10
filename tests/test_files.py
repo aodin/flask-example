@@ -6,4 +6,4 @@ def test_example(s3):
     example = Example.load(s3.name)
     example.update()
     example.save(s3.name)
-    assert 'timestamp' in example.mapping
+    assert "timestamp" in example.mapping

@@ -9,38 +9,40 @@ from ..extensions import db, login_manager
 from ..models import TimestampMixin
 
 
-UNUSABLE_PASSWORD_PREFIX = '!UNUSABLE/'
+UNUSABLE_PASSWORD_PREFIX = "!UNUSABLE/"
 
 
 def normalize_email(email: str) -> str:
     """Normalize the email address by lowercasing the domain."""
     try:
-        name, domain = email.strip().rsplit('@', 1)
-        email = name + '@' + domain.lower()
+        name, domain = email.strip().rsplit("@", 1)
+        email = name + "@" + domain.lower()
     except ValueError:
         pass
     return email
 
 
 class User(UserMixin, TimestampMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
     email = Column(String(256), unique=True, nullable=False)
-    password = Column(String(256), nullable=False, default='')
+    password = Column(String(256), nullable=False, default="")
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f"<User {self.email}>"
 
     @property
     def has_usable_password(self) -> bool:
-        return bool(self.password) and \
-            not self.password.startswith(UNUSABLE_PASSWORD_PREFIX)
+        return bool(self.password) and not self.password.startswith(
+            UNUSABLE_PASSWORD_PREFIX
+        )
 
     @property
     def has_unusable_password(self) -> bool:
-        return bool(self.password) and \
-            self.password.startswith(UNUSABLE_PASSWORD_PREFIX)
+        return bool(self.password) and self.password.startswith(
+            UNUSABLE_PASSWORD_PREFIX
+        )
 
     def set_password(self, password: str):
         """
@@ -49,7 +51,7 @@ class User(UserMixin, TimestampMixin, db.Model):
         """
         self.password = generate_password_hash(
             password,
-            method='pbkdf2:sha256',
+            method="pbkdf2:sha256",
             salt_length=16,
         )
 

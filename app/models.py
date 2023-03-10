@@ -10,5 +10,6 @@ def now() -> datetime:
 
 class TimestampMixin:
     """Adds created and updated at timestamps to a model"""
+
     created_at = Column(DateTime(timezone=True), nullable=False, default=now)
     updated_at = Column(DateTime(timezone=True), onupdate=now)
